@@ -6,34 +6,11 @@
 /*   By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 09:40:49 by jroux-fo          #+#    #+#             */
-/*   Updated: 2021/12/23 15:05:39 by jroux-fo         ###   ########.fr       */
+/*   Updated: 2021/12/23 15:09:51 by jroux-fo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-
-// int	ft_count(char *str)
-// {
-// 	int	i;
-// 	int res;
-
-// 	i = 0;
-// 	res = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '%')
-// 		{
-// 			res++;
-// 			if (str[i + 1] == '%')
-// 				res--;
-// 		}
-// 		i++;
-// 	}
-// 	if (!res)
-// 		ft_putstr(str);
-// 	return (res);
-// }
 
 int	ft_parsing_2(va_list argptr, char c, int count)
 {
