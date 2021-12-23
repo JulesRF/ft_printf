@@ -6,7 +6,7 @@
 /*   By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 14:20:27 by jroux-fo          #+#    #+#             */
-/*   Updated: 2021/12/22 16:55:02 by jroux-fo         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:13:04 by jroux-fo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int	ft_putstr(char *s, int count)
 	int	i;
 
 	i = 0;
-	if (s)
+	if (s == NULL)
 	{
-		while (s[i])
-		{
-			ft_putchar(s[i]);
-			i++;
-		}
+		count = ft_putstr("(null)", count);
+		return (i + count);
+	}
+	while (s[i])
+	{
+		ft_putchar(s[i]);
+		i++;
 	}
 	return (i + count);
 }
@@ -76,7 +78,7 @@ int	ft_putnbr_base(unsigned long long int nbr, char *base, int count)
 	unsigned long long int	size;
 
 	size = ft_strlen(base);
-	if (nbr <= size)
+	if (nbr < size)
 		count = count + ft_putchar(base[nbr % size]);
 	else
 	{

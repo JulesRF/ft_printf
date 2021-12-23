@@ -6,7 +6,7 @@
 /*   By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 09:40:49 by jroux-fo          #+#    #+#             */
-/*   Updated: 2021/12/22 17:19:42 by jroux-fo         ###   ########.fr       */
+/*   Updated: 2021/12/23 15:05:39 by jroux-fo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,6 @@ int	ft_parsing_2(va_list argptr, char c, int count)
 		count = count + ft_putchar(va_arg(argptr, int));
 	else if (c == 'd' || c == 'i')
 		count = ft_putnbr(va_arg(argptr, int), count);
-	else
-	{
-		printf("coucou\n");
-		count = ft_putstr("(null)", count);
-	}
-	printf("coucou\n");
 	return (count);
 }
 
@@ -56,7 +50,7 @@ int	ft_parsing(va_list argptr, char c, int count)
 {
 	unsigned long long int	p;
 	unsigned int			u;
-	
+
 	if (c == 'u')
 	{
 		p = va_arg(argptr, unsigned int);
@@ -82,22 +76,22 @@ int	ft_parsing(va_list argptr, char c, int count)
 
 int	ft_skip_flag(char *str, int i)
 {
-	while (str[i])
+	if (str[i])
 	{
 		if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' || str[i] == 'd'
-		|| str[i] == 'i' || str[i] == 'u' || str[i] == 'x' || str[i] == '%')
+			|| str[i] == 'i' || str[i] == 'u' || str[i] == 'x' || str[i] == '%')
 			return (i + 1);
 		i++;
 	}
 	return (0);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	int 	count;
+	int		count;
 	int		i;
 	va_list	argptr;
-	
+
 	i = 0;
 	count = 0;
 	va_start(argptr, format);
@@ -108,18 +102,12 @@ int ft_printf(const char *format, ...)
 			count = ft_parsing(argptr, format[i + 1], count);
 			i = ft_skip_flag((char *)format, i + 1);
 		}
-		if (i < ft_strlen(format))
+		if (i < ft_strlen(format) && format[i] != '%')
 		{
 			count = count + ft_putchar(format[i]);
+			i++;
 		}
-		i++;
 	}
 	va_end(argptr);
 	return (count);
-}
-
-int main()
-{
- 	printf("nbr de char aff : %d\n", printf(" NULL %s NULL", NULL));
- 	printf("nbr de char aff : %d\n", ft_printf(" NULL %s NULL", NULL));
 }
