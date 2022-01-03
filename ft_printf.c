@@ -6,7 +6,7 @@
 /*   By: jroux-fo <jroux-fo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 09:40:49 by jroux-fo          #+#    #+#             */
-/*   Updated: 2021/12/23 15:09:51 by jroux-fo         ###   ########.fr       */
+/*   Updated: 2021/12/24 15:24:13 by jroux-fo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,19 @@
 
 int	ft_parsing_2(va_list argptr, char c, int count)
 {
+	unsigned int			u;
+
 	if (c == 's')
 		count = ft_putstr(va_arg(argptr, char *), count);
 	else if (c == 'c')
 		count = count + ft_putchar(va_arg(argptr, int));
 	else if (c == 'd' || c == 'i')
 		count = ft_putnbr(va_arg(argptr, int), count);
+	else if (c == 'X')
+	{
+		u = va_arg(argptr, int);
+		count = ft_putnbr_base(u, "0123456789ABCDEF", count);
+	}
 	return (count);
 }
 
@@ -56,7 +63,8 @@ int	ft_skip_flag(char *str, int i)
 	if (str[i])
 	{
 		if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' || str[i] == 'd'
-			|| str[i] == 'i' || str[i] == 'u' || str[i] == 'x' || str[i] == '%')
+			|| str[i] == 'i' || str[i] == 'u' || str[i] == 'x' || str[i] == 'X'
+			|| str[i] == '%')
 			return (i + 1);
 		i++;
 	}
